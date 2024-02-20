@@ -1,5 +1,4 @@
-<!-- TODO1: PHP: POO: Crie uma classe MaterialEscolar e instancie objetos -->
-<!-- TODO2: PHP: POO: Exiba objetos instanciados da classe MaterialEscolar em uma tabela. -->
+<!-- TODO1: PHP: POO: Ilustre um exemplo de Heranca-->
 
 
 <!DOCTYPE html>
@@ -42,7 +41,7 @@
 		}
 
 		public function getDados(){
-			return [$this->nome, $this->codigo, $this->email];
+			return [$this->nome, $this->codigo, $this->email, $this->getCor(), $this->getTamanho()];
 		}
 
 		public function exibir(){
@@ -65,34 +64,61 @@
 
 	}
 
-	$lapis = new MaterialEscolar("Lápis", 111, "fornecedor111@utfpr.edu.br");
-	//var_dump($lapis);	
-	$borracha = new MaterialEscolar("Borracha", 222, "fornecedor222@utfpr.edu.br");
-	$caneta = new MaterialEscolar("Caneta", 333, "fornecedor333@utfpr.edu.br");
+	final class Produto extends MaterialEscolar {
+
+		private $cor;
+		private $tamanho;
+		public function __construct($nome1, $codigo1, $email1, $cor1, $tamanho1){
+
+			//Construtor da superclasse
+			parent::__construct($nome1, $codigo1, $email1);
+
+			$this->cor = $cor1;
+			$this->tamanho = $tamanho1;
+		}
+		public function getCor(){
+			return $this->cor;
+		}
+		public function getTamanho(){
+			return $this->tamanho;
+		}
+
+	}
+
 
 	echo '<h1>...</h1>';
-	/*$lapis->exibir();
-	$borracha->exibir();
-	$caneta->exibir();
-	*/
 
 	?>
 
 	<!-- TODO2 -->
-	<table border="1">
+	<table id="tabela">
 		<tr>
 			<th>Produto</th>
 			<th>Código</th>
 			<th>E-mail do Fornecedor</th>
+			<th>Cor</th>
+			<th>Tamanho</th>
 		</tr>
 		 
 			<?php
 				$listaProdutos = [];
-				array_push($listaProdutos, $lapis,$borracha,$caneta); 
+
+				//Polimorfismo
+				$produto = new Produto("Lápis", 111, "fornecedor111@utfpr.edu.br","preto","10");
+				array_push($listaProdutos, $produto);
+				
+				$produto = new Produto("Borracha", 222, "fornecedor222@utfpr.edu.br","verde","20");
+				array_push($listaProdutos, $produto);
+
+				$produto = new Produto("Caneta", 333, "fornecedor333@utfpr.edu.br", "azul", "30");
+				array_push($listaProdutos, $produto);
+
 				foreach($listaProdutos as $item){
 					echo '<tr><td>' . $item->getNome() . '</td>';
 					echo '<td>' . $item->getCodigo() . '</td>';
-					echo '<td>' . $item->getEmail() . '</td></tr>';
+					echo '<td>' . $item->getEmail() . '</td>';
+					echo '<td>' . $item->getCor() . '</td>';
+					echo '<td>' . $item->getTamanho() . '</td></tr>';
 				}
 			?>
 		
