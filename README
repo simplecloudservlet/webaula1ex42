@@ -1,11 +1,11 @@
 
-WEBAULA1EX41
+WEBAULA1EX42
 
 git init
 git add *
 git commit -m "first commit"
 git branch -M main
-git remote add origin https://github.com/simplecloudservlet/webaula1ex41.git
+git remote add origin https://github.com/simplecloudservlet/webaula1ex42.git
 git push -u origin main
 
 ---
